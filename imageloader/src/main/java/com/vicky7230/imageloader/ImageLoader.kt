@@ -16,6 +16,7 @@ object ImageLoader {
     private var executorService: ExecutorService =
         Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())
     private val uiHandler: Handler = Handler(Looper.getMainLooper())
+    private val futures = mutableListOf<Future<*>>()
 
     fun setCache(cache: ImageCache) {
         this.cache = cache
@@ -28,7 +29,8 @@ object ImageLoader {
             return null
         }
         imageView.tag = url
-        return executorService.submit {
+
+        val future = executorService.submit {
             val bitmap: Bitmap? = downloadImage(url)
             if (bitmap != null) {
                 if (imageView.tag == url) {
@@ -37,10 +39,18 @@ object ImageLoader {
                 cache.put(url, bitmap)
             }
         }
+
+        futures.add(future)
+        return future
     }
 
     fun clearCache() {
         this.cache.clear()
+    }
+
+    fun stopAllImageLoading() {
+        for (future in futures)
+            future.cancel(true)
     }
 
     private fun updateImageView(imageView: ImageView, bitmap: Bitmap) {

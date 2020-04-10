@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.vicky7230.imageloader.ImageLoader
 import com.vicky7230.imagessubredditviewer.R
 import com.vicky7230.imagessubredditviewer.data.network.ImageUrl
 import com.vicky7230.imagessubredditviewer.data.network.Resource
@@ -74,5 +75,10 @@ class HomeActivity : BaseActivity(), HasAndroidInjector, ImagesAdapter.Callback 
 
     override fun onItemClick(imageUrl: ImageUrl) {
         startActivity(ImageActivity.getStartIntent(this, imageUrl.url))
+    }
+
+    override fun onDestroy() {
+        ImageLoader.stopAllImageLoading()
+        super.onDestroy()
     }
 }
