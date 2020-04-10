@@ -1,9 +1,12 @@
-# greedy_game_problem
+#ImagesSubRedditViewer
+
+Project Structure
+-----------------
 ```
-Project Root
 +-- imageloader (ImageLoading library)
 +-- app (App to display the list of images and handle the networking part )
 ```
+
 Include this line in your settings.gradle
 ----------------------------------------
 ```groovy
@@ -28,14 +31,17 @@ How does ImageLoading library works?
 How do I use ImageLoader?
 -------------------------
 ```kotlin
-
-//Initialize image loading library in Application.class
-//And Set Cache Type (DiskCache, MemoryCache, DoubleCache)
+//Initialize and Set Cache Type (DiskCache, MemoryCache, DoubleCache) in
+//Application class
 ImageLoader.setCache(DoubleCache(applicationContext))
 
 //Asynchronously load the image onto the ImageView.
 val future = ImageLoader.displayImage(url, image_big)
 
-//ImageLoader.displayImage() returns a future which can be used to cancel the operation  in case the loading is not needed anymore.
+//ImageLoader.displayImage() returns a future,
+//which can be used to cancel the specific operation in case the loading is not needed anymore.
 future?.cancel(true) 
+
+//Cancel all existing pending tasks
+ImageLoader.stopAllImageLoading()
 ```
