@@ -21,6 +21,6 @@ dependencies {
 How does ImageLoading library works?
 ------------------------------------
 1. ImageLoader receives a request which contains an ImageView and Image URL
-2. Check whether Image exist in cache(first memory cache and then disk cache if using ```DoubleCache``) or not
+2. Check whether Image exist in cache(first memory cache and then disk cache if using ```DoubleCache```) or not
 3. If Image exists in the cache, then load it onto ImageView.
 4. If Image doesn't exist in the cache, then Download the Image, write it to the cache and execute Step 3
