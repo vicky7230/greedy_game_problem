@@ -1,4 +1,4 @@
-#ImagesSubRedditViewer
+# ImagesSubRedditViewer
 
 Project Structure
 -----------------
@@ -36,7 +36,7 @@ How do I use ImageLoader?
 ImageLoader.setCache(DoubleCache(applicationContext))
 
 //Asynchronously load the image onto the ImageView.
-val future = ImageLoader.displayImage(url, image_big)
+val future = ImageLoader.displayImage(url, image_view)
 
 //ImageLoader.displayImage() returns a future,
 //which can be used to cancel the specific operation in case the loading is not needed anymore.
