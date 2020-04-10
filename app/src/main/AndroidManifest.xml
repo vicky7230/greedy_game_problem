@@ -19,6 +19,7 @@
             android:name=".ui.image.ImageActivity"
             android:label="Big Image"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.home.HomeActivity"
             android:screenOrientation="portrait">
