@@ -9,7 +9,6 @@ import com.vicky7230.imagessubredditviewer.R
 import com.vicky7230.imagessubredditviewer.data.network.ImageUrl
 import com.vicky7230.imagessubredditviewer.utils.CommonUtils.isValidUrl
 import kotlinx.android.synthetic.main.image_list_item.view.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class ImagesAdapter(private var images: ArrayList<ImageUrl>) :
