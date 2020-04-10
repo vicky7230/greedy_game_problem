@@ -9,6 +9,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import java.util.concurrent.Future
 
 object ImageLoader {
     private lateinit var cache: ImageCache
@@ -20,14 +21,14 @@ object ImageLoader {
         this.cache = cache
     }
 
-    fun displayImage(url: String, imageView: ImageView) {
+    fun displayImage(url: String, imageView: ImageView): Future<*>? {
         val cached = cache.get(url)
         if (cached != null) {
             updateImageView(imageView, cached)
-            return
+            return null
         }
         imageView.tag = url
-        executorService.submit {
+        return executorService.submit {
             val bitmap: Bitmap? = downloadImage(url)
             if (bitmap != null) {
                 if (imageView.tag == url) {

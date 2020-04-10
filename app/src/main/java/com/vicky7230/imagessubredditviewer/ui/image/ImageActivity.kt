@@ -8,8 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.vicky7230.imageloader.ImageLoader
 import com.vicky7230.imagessubredditviewer.R
 import kotlinx.android.synthetic.main.activity_image.*
+import java.util.concurrent.Future
 
 class ImageActivity : AppCompatActivity() {
+
+    var future: Future<*>? = null
 
     companion object {
 
@@ -32,7 +35,7 @@ class ImageActivity : AppCompatActivity() {
 
         if (intent != null && intent.getStringExtra(URL) != null) {
             val url: String = intent.getStringExtra(URL)!!
-            ImageLoader.displayImage(url, image_big)
+            future = ImageLoader.displayImage(url, image_big)
         }
     }
 
@@ -43,5 +46,10 @@ class ImageActivity : AppCompatActivity() {
         } else {
             super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroy() {
+        future?.cancel(true)
+        super.onDestroy()
     }
 }
