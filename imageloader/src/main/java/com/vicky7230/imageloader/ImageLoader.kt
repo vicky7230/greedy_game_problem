@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Handler
 import android.os.Looper
-import android.util.LruCache
 import android.widget.ImageView
 import java.net.HttpURLConnection
 import java.net.URL
@@ -13,7 +12,8 @@ import java.util.concurrent.Executors
 
 object ImageLoader {
     private lateinit var cache: ImageCache
-    private var executorService: ExecutorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())
+    private var executorService: ExecutorService =
+        Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())
     private val uiHandler: Handler = Handler(Looper.getMainLooper())
 
     fun setCache(cache: ImageCache) {
@@ -51,8 +51,8 @@ object ImageLoader {
     private fun downloadImage(url: String): Bitmap? {
         var bitmap: Bitmap? = null
         try {
-            val url = URL(url)
-            val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+            val url1 = URL(url)
+            val conn: HttpURLConnection = url1.openConnection() as HttpURLConnection
             bitmap = BitmapFactory.decodeStream(conn.inputStream)
             conn.disconnect()
         } catch (e: Exception) {

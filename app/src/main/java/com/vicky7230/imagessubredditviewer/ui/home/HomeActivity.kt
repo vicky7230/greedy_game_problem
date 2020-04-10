@@ -15,6 +15,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.activity_home.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class HomeActivity : BaseActivity(), HasAndroidInjector, ImagesAdapter.Callback {
@@ -57,6 +58,7 @@ class HomeActivity : BaseActivity(), HasAndroidInjector, ImagesAdapter.Callback 
                     showError(it.exception.localizedMessage)
                 }
                 is Resource.Success -> {
+                    Timber.e(it.data.toString())
                     imagesAdapter.updateItems(it.data)
                     hideLoading()
                 }
